@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Level 5 ❤️</title>
+
+<style>
+
+body{
+
+    background-image:url("Level5bgnew.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    margin:0;
+
+    text-align:center;
+
+    font-family:Arial;
+
+    overflow-x:hidden;
+
+}
+
+h1{
+
+    color:white;
+
+    font-size:52px;
+
+    text-shadow:
+
+        0 0 20px hotpink,
+
+        0 0 35px rgba(0,0,0,.5);
+
+}
+
+#wheel{
+
+    position:relative;
+
+    width:350px;
+
+    height:350px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.18);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    border:6px solid rgba(255,255,255,0.7);
+
+    margin:40px auto;
+
+    box-shadow:
+        0 0 35px rgba(255,182,193,.8);
+
+    transition:transform 3s ease-out;
+
+    overflow:hidden;
+
+}
+
+.icon{
+
+    position:absolute;
+
+    font-size:38px;
+
+    text-shadow:
+
+        0 0 10px white;
+
+}
+
+.icon1{top:10px;left:150px;}
+.icon2{top:40px;right:40px;}
+.icon3{top:120px;right:10px;}
+.icon4{bottom:120px;right:10px;}
+.icon5{bottom:40px;right:40px;}
+.icon6{bottom:10px;left:150px;}
+.icon7{bottom:40px;left:40px;}
+.icon8{bottom:120px;left:10px;}
+.icon9{top:120px;left:10px;}
+.icon10{top:40px;left:40px;}
+.icon11{top:170px;left:150px;}
+
+#centerText{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:65px;
+
+    text-shadow:
+
+        0 0 20px hotpink,
+
+        0 0 40px white;
+
+}
+
+button{
+
+    padding:18px 45px;
+
+    font-size:24px;
+
+    border:3px solid white;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+
+        135deg,
+
+        #ff4fa3,
+
+        #ff7ac7
+
+    );
+
+    color:white;
+
+    cursor:pointer;
+
+    box-shadow:
+
+        0 0 25px hotpink;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+#popup{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 0 30px pink;
+
+    z-index:999;
+
+    width:450px;
+
+    max-height:80vh;
+
+overflow-y:auto;
+
+}
+
+#overlay{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,0.5);
+
+    z-index:998;
+
+}
+#photo{
+
+    width:350px;
+
+    border-radius:20px;
+
+    box-shadow:0 0 20px pink;
+
+}
+
+#msg{
+
+    margin-top:20px;
+
+    font-size:25px;
+
+    color:#d63384;
+
+    font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>❤️ Journey Through Our Memories ❤️</h1>
+
+<div id="wheel">
+
+<div class="icon icon1">❤️</div>
+<div class="icon icon2">🌹</div>
+<div class="icon icon3">💖</div>
+<div class="icon icon4">🌷</div>
+<div class="icon icon5">💕</div>
+<div class="icon icon6">💘</div>
+<div class="icon icon7">🎂</div>
+<div class="icon icon8">💝</div>
+<div class="icon icon9">❤️</div>
+<div class="icon icon10">🌷</div>
+<div class="icon icon11">💖</div>
+
+<div id="centerText">
+❤️
+</div>
+
+
+</div>
+
+<button onclick="spinWheel()">
+
+❤️ Spin Wheel ❤️
+
+</button>
+
+<div id="overlay"></div>
+
+<div id="popup">
+
+<img id="photo">
+
+<div id="msg"></div>
+
+<br>
+
+<br>
+
+</div>
+<script>
+
+const memories = [
+{
+title:"👦 Once Upon A Time...",
+photo:"Chinna.png",
+msg:"👦 Every great story starts with a little boy... full of innocence, dreams, and a smile that could brighten anyone's day. ❤️"
+},
+
+{
+title:"😎 The Style King Era",
+photo:"style.png",
+msg:"😎 Looking good wasn't a choice... it was a lifestyle. The Style King had officially arrived. ❤️😂"
+},
+
+{
+title:"🤓 A Mind Full Of Dreams",
+photo:"specs.png",
+msg:"🤓 Behind those glasses was a dreamer, a thinker, and someone destined for something special. ❤️"
+},
+
+{
+title:"😂 The Chaos Years",
+photo:"crazy.png",
+msg:"😂 Life was simple... laugh loudly, make memories, be a little crazy, and enjoy every moment. ❤️"
+},
+
+{
+title:"🥹 A Heart Of Gold",
+photo:"cry.png",
+msg:"🥹 Beneath the smiles and jokes was a heart full of kindness, love, and care for everyone around him. ❤️"
+},
+
+{
+title:"❤️ The Hero Of Our Story",
+photo:"Red.png",
+msg:"❤️ Not all heroes wear capes... some simply make life brighter for the people they love. ❤️"
+},
+
+{
+title:"🍫 Too Sweet To Handle",
+photo:"Jamun.png",
+msg:"🍫 Warning: Excess sweetness detected. Sweeter than Jamun and impossible not to love. ❤️😂"
+},
+
+{
+title:"🏆 The GOAT Chapter",
+photo:"goat.png",
+msg:"🏆 Family Favourite. Memory Maker. Award Winner. Certified GOAT. ❤️"
+},
+
+{
+title:"❤️ A New Chapter ❤️",
+photo:"heart.png",
+msg:"❤️ Every beautiful story has a turning point...<br><br>One ordinary day..<br>He met someone extraordinary. ❤️And from that moment... life became even more beautiful. 🥹❤️"
+},
+
+{
+title:"💍 Forever Started",
+photo:"Two.png",
+msg:"💍 Two hearts. One promise. One beautiful journey. The beginning of forever. ❤️"
+},
+
+{
+title:"💕 We Became Us",
+photo:"sri.png",
+msg:"💕 It was no longer 'Me' and 'You'... it became 'Us'. A team, a family, and a love story still being written. ❤️"
+},
+
+{
+title:"👶 Future Nanna",
+photo:"ani.png",
+msg:"👶 The next and most beautiful title is almost here... Husband became Hero... and now an amazing NANNA is loading. ❤️🥹"
+}
+
+]
+
+let current = 0;
+let rotation = 0;
+
+let songChanged = false;
+
+function spinWheel(){
+
+    let wheel =
+    document.getElementById("wheel");
+
+    rotation += 1080;
+
+    wheel.style.transform =
+    "rotate(" + rotation + "deg)";
+
+    setTimeout(()=>{
+
+        document.getElementById("photo").src =
+        memories[current].photo;
+
+        document.getElementById("msg").innerHTML =
+        memories[current].msg;
+
+        document.getElementById("overlay").style.display =
+"block";
+
+document.getElementById("popup").style.display =
+"block";
+
+       if(current == 8 && !songChanged){
+
+    songChanged = true;
+
+    let memorySong = document.getElementById("memorySong");
+
+    let loveSong = document.getElementById("loveSong");
+
+    memorySong.pause();
+
+    memorySong.currentTime = 0;
+
+    loveSong.currentTime = 0;
+
+    setTimeout(function(){
+
+    loveSong.play().catch(function(err){
+        console.log(err);
+    });
+
+},500);
+
+}
+
+        setTimeout(()=>{
+
+    document.getElementById("popup").style.display =
+    "none";
+
+    document.getElementById("overlay").style.display =
+    "none";
+
+    current++;
+
+    // After the last memory, go to Level 6
+    if(current >= memories.length){
+
+    document.getElementById("photo").style.display = "none";
+
+    document.getElementById("msg").innerHTML =
+    "👶 Someone very special has been waiting patiently to talk to you... ❤️";
+
+    document.getElementById("overlay").style.display = "block";
+
+    document.getElementById("popup").style.display = "block";
+
+    setTimeout(function(){
+
+        document.getElementById("msg").innerHTML =
+        "💌 Opening Baby Kannaya's Letter... ❤️";
+
+    },2000);
+
+    setTimeout(function(){
+
+        let loveSong = document.getElementById("loveSong");
+
+        loveSong.pause();
+
+        loveSong.currentTime = 0;
+
+        window.location.href = "Level4.html";
+
+    },4500);
+
+    return;
+
+}
+
+},6000);
+    },3000);
+
+}
+
+function showFinalMessage(){
+
+    alert("🎂 HAPPY BIRTHDAY KANNAYA ❤️");
+
+}
+
+window.onload = function(){
+
+    let song = document.getElementById("memorySong");
+
+    song.currentTime = 0;
+
+    song.play().catch(function(err){
+        console.log(err);
+    });
+
+}
+</script>
+
+<audio id="memorySong" autoplay loop>
+    <source src="Animal.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="loveSong" loop>
+    <source src="Thuhiho.mp3" type="audio/mpeg">
+</audio>
+
+</body>

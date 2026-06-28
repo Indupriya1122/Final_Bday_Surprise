@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Birthday Surprise</title>
+
+    <style>
+
+        #verifyBtn {
+            position: absolute;
+            top: 250px;
+            left: 500px;
+            padding: 20px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+#message{
+
+    display:inline-block;
+
+    margin-top:30px;
+
+    /* padding:15px 30px; */
+
+    /* border-radius:20px; */
+
+    background:transparent;
+
+    /* backdrop-filter:blur(10px); */
+
+    color:white;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    /* box-shadow:0 0 20px rgba(255,255,255,0.3); */
+
+}
+body{
+
+    background-image: url("level1Bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    margin: 0;
+
+    height: 100vh;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+}
+
+h1{
+
+    color:#FFF8DC;
+
+    font-size:70px;
+
+    font-weight:bold;
+
+    margin-top:60px;
+
+    text-shadow:
+        0 0 10px #FFD700,
+        0 0 25px #FF69B4,
+        0 0 45px #FFFFFF;
+
+}
+#verifyBtn{
+
+    /* background: linear-gradient(45deg,#ff4da6,#ff66b3); */
+    background:linear-gradient(
+45deg,
+#8A2BE2,
+#C71585,
+#FF69B4
+);
+
+    color:white;
+
+    border:none;
+
+    padding:20px 35px;
+
+    border-radius:15px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    /* box-shadow:0 0 20px #ff66b3; */
+    box-shadow:
+0 0 20px #FF69B4,
+0 0 40px #C71585;
+
+    animation:pulse 2s infinite;
+
+    transition:.3s;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:0 0 20px pink;
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+        box-shadow:0 0 40px hotpink;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:0 0 20px pink;
+
+    }
+
+}
+
+.floatingHeart{
+
+    position:fixed;
+
+    bottom:-50px;
+
+    font-size:80px;
+
+    pointer-events:none;
+
+    animation:floatHeart linear forwards;
+
+    z-index:0;
+
+    opacity:.8;
+
+}
+
+@keyframes floatHeart{
+
+    from{
+
+        transform:
+        translateY(0)
+        rotate(0deg);
+
+        opacity:.9;
+
+    }
+
+    to{
+
+        transform:
+        translateY(-120vh)
+        rotate(360deg);
+
+        opacity:0;
+
+    }
+
+}
+
+#verifyBtn:hover{
+
+    transform:scale(1.08);
+
+}
+
+body{
+
+    animation:fadePage 2s;
+
+}
+
+@keyframes fadePage{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(1.03);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.sparkle{
+
+    position:fixed;
+
+    width:6px;
+
+    height:6px;
+
+    background:white;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 15px #ff69b4;
+
+    animation: sparkle 3s linear forwards;
+
+}
+
+@keyframes sparkle{
+
+    from{
+
+        opacity:1;
+
+        transform:scale(0);
+
+    }
+
+    50%{
+
+        transform:scale(1);
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:
+        translateY(-80px)
+        scale(0);
+
+    }
+
+}
+    </style>
+
+</head>
+
+<body>
+
+    <h1>🎂 Welcome Birthday Boy ❤️</h1>
+
+<p id="message">
+🥰 A very special surprise is waiting for you...<br><br>
+But first, let's make sure you're really my Kannaya 😏❤️
+</p>
+
+    <button id="verifyBtn">
+        I AM THE BEST HUSBAND
+    </button>
+
+    <script>
+
+
+
+const btn = document.getElementById("verifyBtn");
+
+let musicStarted = false;
+
+let ctrlPressed = false;
+
+document.addEventListener("mousemove", function(){
+
+    if(!musicStarted){
+
+        musicStarted = true;
+
+        let song = document.getElementById("entrySong");
+
+        song.play();
+
+    }
+
+});
+
+document.addEventListener("keydown", function(e){
+
+    if(e.ctrlKey){
+
+        ctrlPressed = true;
+
+        let song = document.getElementById("entrySong");
+
+        if(song.paused){
+
+            song.play();
+
+        }
+
+    }
+
+});
+
+const hintMessages = [
+
+    "Verification Failed 😂",
+
+    "Handsome level not detected 😜",
+
+    "System Error: Too Much Confidence 😆",
+
+    "Are you really Kannaya? 🤔",
+
+    "🤔 Hmm... you seem determined.",
+
+    "😂 Still trying?",
+
+    "💡 Tiny Hint Available...",
+
+    "😏 Okay Kannaya... Try holding CTRL while catching me."
+
+];
+
+let msgIndex = 0;
+
+const hintTimer = setInterval(() => {
+
+    if(!ctrlPressed){
+
+        document.getElementById("message").innerHTML =
+        hintMessages[msgIndex];
+
+        msgIndex++;
+
+        if(msgIndex >= hintMessages.length){
+
+            clearInterval(hintTimer);
+
+        }
+
+    }
+
+}, 3000);
+
+btn.addEventListener("mouseover", function () {
+
+    if(!ctrlPressed){
+
+        let x = Math.random() * (window.innerWidth - 250);
+        let y = Math.random() * (window.innerHeight - 100);
+
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+
+    }
+
+});
+
+btn.addEventListener("click", function(){
+
+    // 🎵 Stop the background music
+    let song = document.getElementById("entrySong");
+
+    let fade = setInterval(function(){
+
+        if(song.volume > 0.05){
+
+            song.volume -= 0.05;
+
+        }
+        else{
+
+            clearInterval(fade);
+
+            song.volume = 1;
+
+        }
+
+    },100);
+
+    document.getElementById("message").innerHTML =
+"🥰 Identity Verified ❤️<br><br>" +
+"Welcome, Birthday Boy...<br><br>" +
+"🎁 Your surprise journey begins now...";
+
+    btn.style.display = "none";
+
+    setTimeout(() => {
+
+        window.location.href = "Level2.html";
+
+    },4000);
+
+});
+
+function createHeart(){
+
+    let heart = document.createElement("div");
+
+    heart.className = "floatingHeart";
+
+    const hearts = ["❤️","💖","💕","💗","💘"];
+
+    heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left = Math.random()*window.innerWidth + "px";
+
+    // heart.style.animationDuration = (6 + Math.random()*5) + "s";
+
+    heart.style.animationDuration =
+(6 + Math.random()*5) + "s";
+
+heart.style.fontSize =
+(30 + Math.random()*40) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },11000);
+
+}
+
+// Create a heart every 800ms
+setInterval(createHeart,800);
+
+function createSparkle(){
+
+    let s = document.createElement("div");
+
+    s.className = "sparkle";
+
+    s.style.left = Math.random()*window.innerWidth + "px";
+
+    s.style.top = Math.random()*window.innerHeight + "px";
+
+    document.body.appendChild(s);
+
+    setTimeout(()=>{
+
+        s.remove();
+
+    },3000);
+
+}
+
+setInterval(createSparkle,300);
+    </script>
+
+    
+
+</body>
+
+</html>

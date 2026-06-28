@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Level 4 - Quiz</title>
+
+<style>
+body{
+
+    background-image:url("Level3BG.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    margin:0;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    font-family:Arial,sans-serif;
+
+}
+
+h1{
+
+    color:#FFF8DC;
+
+    font-size:60px;
+
+    margin-top:50px;
+
+    text-shadow:
+
+    0 0 10px #FFD700,
+
+    0 0 25px hotpink,
+
+    0 0 40px white;
+
+}
+
+
+#question{
+
+    font-size:40px;
+
+    color:white;
+
+    font-weight:bold;
+
+    margin:35px;
+
+    text-shadow:
+        0 0 10px black,
+        0 0 20px hotpink,
+        0 0 35px black;
+
+}
+
+.option{
+
+    display:block;
+
+    width:480px;
+
+    margin:18px auto;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:linear-gradient(
+        45deg,
+        #ff4da6,
+        #ff66cc
+    );
+
+    box-shadow:0 0 20px hotpink;
+
+    transition:.3s;
+
+}
+
+.option:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:0 0 40px white;
+
+}
+
+#result{
+
+    margin-top:30px;
+
+    font-size:30px;
+
+    color:white;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 10px black,
+        0 0 20px hotpink,
+        0 0 30px black;
+
+}
+
+.rose{
+    position:fixed;
+    top:-50px;
+    font-size:30px;
+    pointer-events:none;
+    animation:fall linear forwards;
+}
+
+.bubble{
+    position:fixed;
+    bottom:-50px;
+    font-size:25px;
+    pointer-events:none;
+    animation:floatUp linear forwards;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-50px);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+        opacity:0.8;
+    }
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+.angry{
+
+    position:fixed;
+
+    font-size:200px;
+
+    pointer-events:none;
+
+    animation:pop 2s forwards;
+
+}
+
+@keyframes pop{
+
+    from{
+        transform:scale(0);
+        opacity:1;
+    }
+
+    to{
+        transform:scale(2);
+        opacity:0;
+    }
+
+}
+
+#quizContent{
+
+    width:900px;
+
+    margin:70px auto;
+
+}
+
+.fadeIn{
+
+    animation:fadeQuestion .6s;
+
+}
+
+@keyframes fadeQuestion{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(120px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+.challengeTitle{
+
+    font-size:60px;
+
+    color:#FFF8DC;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 10px gold,
+        0 0 25px hotpink,
+        0 0 40px white;
+
+}
+
+.challengeSub{
+
+    margin-top:20px;
+
+    font-size:34px;
+
+    color:white;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 10px hotpink,
+        0 0 20px white;
+
+}
+
+.challengeTitle{
+
+    font-size:70px;
+
+    font-weight:bold;
+
+    color:#C2185B;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 20px #FF80AB,
+        0 0 40px white;
+
+    animation:zoomIn 1s;
+
+}
+
+.challengeSub{
+
+    margin-top:25px;
+
+    font-size:38px;
+
+    font-weight:bold;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px hotpink,
+        0 0 20px deeppink,
+        0 0 35px white;
+
+    animation:fadeIn 2s;
+
+}
+
+@keyframes zoomIn{
+
+    from{
+
+        transform:scale(.5);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="intro">
+
+    <h2 id="countdown"></h2>
+
+</div>
+
+<div id="quizContent" style="display:none;">
+
+    <div id="question"></div>
+
+    <div id="options"></div>
+
+    <p id="result"></p>
+
+</div>
+
+<script>
+
+const quiz = [
+
+{
+question:
+"😂 Who is the most dangerous person?",
+
+options:[
+"Kannaya 😇",
+"Mother-in-law 😜",
+"Bujjuluu when hungry 😂",
+"ChatGPT 🤖"
+],
+
+answer:
+"Bujjuluu when hungry 😂"
+},
+
+{
+question:
+"🤔 What should Kannaya do when Bujjuluu says 'I'm Fine'?",
+
+options:[
+"Should Pamper 😂",
+"Run away🏃",
+"Buy chocolates 🍫",
+"Say sorry 😂"
+],
+
+answer:
+"Should Pamper 😂"
+},
+
+{
+question:
+"📱 Most used sentence by Kannaya?",
+
+options:[
+'Manchidi😎',
+'Chuddam le',
+'Nenu chusukunta le😂',
+'Sarele 😂'
+],
+
+answer:
+"Nenu chusukunta le😂"
+},
+
+{
+question:
+"👶 Who is occupying your maximum time?",
+
+options:[
+"Kannaya",
+"Bujjuluu",
+"Baby 👶",
+"Phone...📱"
+],
+
+answer:
+"Phone...📱"
+},
+
+{
+question:
+"❤️ Who loves Kannaya the most?",
+
+options:[
+"Bujjuluu ❤️",
+"Baby 👶",
+"Phone",
+"Infinite Love ♾️"
+],
+
+answer:
+"Infinite Love ♾️"
+}
+
+];
+
+let current = 0;
+
+// const quizMusic = document.getElementById("quizMusic");
+
+window.onload = function(){
+
+    const quizMusic = document.getElementById("quizMusic");
+    quizMusic.play().catch(err => {
+        console.log("Autoplay blocked by browser");
+    });
+
+};
+
+const correctMsgs = [
+
+"🥳 Wahhh! Super Kannaya ❤️",
+
+"😍 You know your Bujjuluu so well!",
+
+"💖 Perfect Answer!",
+
+"🎉 Excellent! One step closer!",
+
+"🥰 That's my Husband!",
+
+"😘 Ahaa... Correct!",
+
+"❤️ 100% Correct Kannaya!",
+
+"🤗 You know me better than anyone!",
+
+"🌹 Smart Husband Award ❤️"
+
+];
+
+const wrongMsgs = [
+
+"😜 Ayyo Kannaya!",
+
+"😂 Think Again!",
+
+"🙈 Bujjuluu is watching!",
+
+"🤭 Wrong Answer!",
+
+"🤣 Nice Try!",
+
+"😏 Is that your final answer?",
+
+"🙄 Seriously?",
+
+"🥲 You can do better!",
+
+"😅 Try Once Again!"
+];
+
+function loadQuestion(){
+
+document.getElementById("question").classList.remove("fadeIn");
+
+void document.getElementById("question").offsetWidth;
+
+document.getElementById("question").classList.add("fadeIn");
+
+document.getElementById("result").innerHTML="";
+
+document.getElementById("question").innerHTML =
+quiz[current].question;
+
+let html="";
+
+quiz[current].options.forEach(option=>{
+
+html +=
+`<button class="option"
+onclick="checkAnswer('${option}')">
+${option}
+</button>`;
+
+});
+
+document.getElementById("options").innerHTML =
+html;
+
+}
+
+function angryRain(){
+
+    for(let i=0;i<15;i++){
+
+        let angry =
+        document.createElement("div");
+
+        angry.classList.add("angry");
+
+        angry.innerHTML="😡";
+
+        angry.style.left=
+        Math.random()*window.innerWidth+"px";
+
+        angry.style.top=
+        Math.random()*window.innerHeight+"px";
+
+        document.body.appendChild(angry);
+
+        setTimeout(()=>{
+            angry.remove();
+        },2000);
+
+    }
+
+}
+
+function heartRain(){
+
+    for(let i = 0; i < 30; i++){
+
+        let heart = document.createElement("div");
+
+        heart.classList.add("angry");
+
+        const hearts = [
+            "❤️",
+            "💖",
+            "💕",
+            "💗",
+            "💘",
+            "💝"
+        ];
+
+        heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+        Math.random() * window.innerWidth + "px";
+
+        heart.style.top =
+        Math.random() * window.innerHeight + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 2000);
+
+    }
+
+}
+
+// function checkAnswer(selected){
+
+//     let correctAnswer = "";
+
+//     if(current === 0){
+
+//         correctAnswer =
+//         "Bujjuluu when hungry 😂";
+
+//     }
+
+//     else if(current === 1){
+
+//         correctAnswer =
+//         "Should Pamper";
+
+//     }
+
+//     else if(current === 2){
+
+//         correctAnswer =
+//         "Nenu chusukunta le😂";
+
+//     }
+
+//     else if(current === 3){
+
+//         correctAnswer =
+//         "Phone...📱";
+
+//     }
+
+//     else if(current === 4){
+
+//         correctAnswer =
+//         "Infinite Love ♾️";
+
+//     }
+
+    
+//     if(selected === correctAnswer)
+
+function checkAnswer(selected){
+
+    let correctAnswer = quiz[current].answer;
+
+    if(selected === correctAnswer){
+
+    playCorrect();   // 🔊 Play Ahaa.mp3
+
+    document.querySelectorAll(".option").forEach(btn => {
+
+        btn.disabled = true;
+
+    });
+
+    heartRain();
+
+
+if(current === quiz.length - 1){
+
+    document.getElementById("result").innerHTML =
+    "🥹 I knew you would never get this one wrong... ❤️";
+
+}
+else{
+
+    document.getElementById("result").innerHTML =
+    correctMsgs[Math.floor(Math.random()*correctMsgs.length)];
+
+}
+
+    setTimeout(nextQuestion,2000);
+
+}
+
+
+    else{
+
+    playWrong();    // 🔊 Play Sairam.mp3
+
+    angryRain();
+
+   document.getElementById("result").innerHTML =
+wrongMsgs[Math.floor(Math.random()*wrongMsgs.length)];
+
+}
+
+}
+function nextQuestion(){
+
+    current++;
+
+    if(current < quiz.length){
+
+        loadQuestion();
+
+    }
+
+    else{
+
+        document.getElementById("question").innerHTML =
+        "🏆 You know your Bujjuluu so well ❤️🥹";
+
+        document.getElementById("options").innerHTML =
+        "";
+
+        // document.getElementById("result").innerHTML =
+        // "Loading Secret Message 👶❤️";
+
+        // setTimeout(()=>{
+
+        //     window.location.href =
+        //     "Level5.html";
+
+        // },3000);
+
+//         document.getElementById("result").innerHTML =
+// "👶 Someone very special has been waiting to talk to you... ❤️";
+
+// setTimeout(()=>{
+
+//     document.getElementById("result").innerHTML =
+//     "💌 Opening Baby Kannaya's Letter... ❤️";
+
+// },1500);
+
+document.getElementById("result").innerHTML =
+"❤️ Before your special birthday wishes... let's take a walk through the beautiful memories of your life... ❤️";
+
+setTimeout(()=>{
+
+    document.getElementById("result").innerHTML =
+    "🎞️ Opening Our Journey Through Memories... ❤️";
+
+},3000);
+
+// setTimeout(()=>{
+
+//     window.location.href = "Level3.html";
+
+// },3000);
+
+setTimeout(()=>{
+
+    window.location.href = "Level5.html";
+
+},3500);
+
+    }
+
+}
+
+let hearts = 1;
+
+document.getElementById("countdown").innerHTML = "💖";
+
+hearts++;
+
+const timer = setInterval(() => {
+
+    document.getElementById("countdown").innerHTML =
+"<span style='font-size:80px;'>"
++ "💖".repeat(hearts) +
+"</span>";
+    hearts++;
+
+    if(hearts > 5){
+
+        clearInterval(timer);
+
+        document.getElementById("countdown").innerHTML =
+
+"<div style='font-size:60px;color:#FFF8DC;font-weight:bold;text-shadow:0 0 10px gold,0 0 25px hotpink,0 0 40px white;'>🏆 Birthday Boy Challenge 🏆</div>"
+
++
+
+"<br>"
+
++
+
+// "<div style='font-size:34px;color:white;font-weight:bold;text-shadow:0 0 10px hotpink,0 0 20px white;'>❤️ Let's see how well you know your Bujjuluu ❤️</div>";
+
+"<div style='font-size:38px;color:white;font-weight:bold;text-shadow:0 0 10px hotpink,0 0 20px white;'>❤️ Are you ready, Birthday Boy? ❤️</div>";
+
+        setTimeout(() => {
+
+            document.getElementById("intro")
+            .style.display = "none";
+
+            document.getElementById("quizContent")
+.style.display = "block";
+
+
+
+loadQuestion();
+
+        }, 4000);
+
+    }
+
+},1000);
+
+// 🫧 Floating Bubbles
+setInterval(() => {
+
+    let bubble = document.createElement("div");
+
+    bubble.classList.add("bubble");
+
+    bubble.innerHTML = "🫧";
+
+    bubble.style.left =
+    Math.random() * window.innerWidth + "px";
+
+    bubble.style.animationDuration =
+    (4 + Math.random()*4) + "s";
+
+    document.body.appendChild(bubble);
+
+    setTimeout(() => {
+
+        bubble.remove();
+
+    },8000);
+
+},5000);
+
+
+// 🎵 Quiz Music (Play Twice)
+
+const quizMusic = document.getElementById("quizMusic");
+
+let playCount = 0;
+
+quizMusic.addEventListener("ended", function(){
+
+    playCount++;
+
+    if(playCount < 4){
+
+        quizMusic.currentTime = 0;
+
+        quizMusic.play();
+
+    }
+
+});
+
+function playCorrect(){
+
+    let sound = document.getElementById("correctSound");
+
+    sound.currentTime = 0;
+
+    sound.play();
+
+}
+
+function playWrong(){
+
+    let sound = document.getElementById("wrongSound");
+
+    sound.currentTime = 0;
+
+    sound.play();
+
+}
+
+</script>
+
+<audio id="quizMusic">
+    <source src="ReelAudio-83150.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="correctSound">
+    <source src="Ahaa.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="wrongSound">
+    <source src="Sairam.mp3" type="audio/mpeg">
+</audio>
+
+
+
+
+</body>
+
+</html>

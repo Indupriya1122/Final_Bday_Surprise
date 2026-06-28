@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Secret Message ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+
+    background-image:url("level4babyBG.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    margin:0;
+
+    overflow-x:hidden;
+
+    text-align:center;
+
+    font-family:Arial,sans-serif;
+
+}
+
+h1{
+
+    color:#d63384;
+
+    font-size:50px;
+
+}
+#msg{
+
+    width:75%;
+
+    max-width:900px;
+
+    margin:40px auto 0;
+
+    text-align:center;
+
+    color:white;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:34px;
+
+    line-height:1.4;   /* Change from 2 to 1.4 */
+
+    text-shadow:
+        0 0 8px rgba(0,0,0,.8),
+        0 0 18px hotpink;
+
+}
+
+button{
+
+    margin-top:50px;
+
+    padding:18px 45px;
+
+    font-size:28px;
+
+    border:none;
+
+    border-radius:60px;
+
+    background:rgba(255,90,170,.75);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    box-shadow:
+
+        0 0 25px hotpink;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+}
+
+button:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+
+        0 0 40px deeppink;
+
+}
+.babyExplosion{
+
+    position:fixed;
+
+    width:80px;
+
+    height:80px;
+
+    pointer-events:none;
+
+    animation:floatBaby 5s linear forwards;
+
+}
+
+@keyframes floatBaby{
+
+    from{
+
+        transform:scale(0.5);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:
+        translateY(-300px)
+        scale(1.3);
+
+        opacity:0;
+
+    }
+
+}
+
+@keyframes explodeBaby{
+
+    from{
+
+        transform:scale(0);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:scale(2);
+
+        opacity:0;
+
+    }
+
+}
+
+.babyBubble{
+
+    position:fixed;
+
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    border:4px solid white;
+
+    box-shadow:0 0 25px pink;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    animation:floatUp 8s linear forwards;
+
+}
+
+.babyBubble img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+}
+.babyBubble img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+}
+
+@keyframes floatUp{
+
+    from{
+
+        transform:translateY(0px);
+
+        opacity:0;
+
+    }
+
+    20%{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:translateY(-120vh);
+
+        opacity:0;
+
+    }
+
+}
+
+.babyBubble{
+
+    position:fixed;
+
+    width:100px;
+
+    height:100px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    animation:floatUp 8s linear forwards;
+
+    border:4px solid white;
+
+    box-shadow:0 0 20px pink;
+
+}
+
+.babyBubble img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+}
+
+@keyframes floatUp{
+
+    from{
+
+        transform:translateY(0px);
+
+        opacity:0;
+
+    }
+
+    20%{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:translateY(-120vh);
+
+        opacity:0;
+
+    }
+
+}
+
+#babyBtn{
+
+    background:#ff66b3;
+
+    color:white;
+
+    border:none;
+
+    padding:15px 25px;
+
+    border-radius:40px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    box-shadow:0 0 20px pink;
+
+}
+
+#babyPopup{
+
+    display:none;
+
+    position:fixed;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    box-shadow:0 0 40px pink;
+
+    text-align:center;
+
+    z-index:9999;
+
+    animation:popBaby 1s ease;
+
+}
+
+#babyPic{
+
+    width:320px;
+
+    border-radius:20px;
+
+    box-shadow:0 0 25px pink;
+
+}
+
+@keyframes popBaby{
+
+    from{
+
+        transform:translate(-50%,-50%) scale(0);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translate(-50%,-50%) scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+.fadeIn{
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+#mainTitle{
+
+    margin-top:50px;
+
+    text-align:center;
+
+    color:white;
+
+    line-height:1.2;
+
+    text-shadow:
+
+        0 0 15px hotpink,
+
+        0 0 35px white;
+
+}
+
+#mainTitle span{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:90px;
+
+    color:#ffd6ec;
+
+    text-shadow:
+
+        0 0 15px hotpink,
+
+        0 0 40px white;
+
+}
+#subTitle{
+
+    margin-top:25px;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:34px;
+
+    color:white;
+
+    line-height:1.5;
+
+    text-shadow:
+
+        0 0 10px hotpink,
+
+        0 0 20px white;
+
+}
+
+.letterTitle{
+
+    margin-top:100px;
+
+    margin-bottom:40px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:70px;
+
+    color:#ffd6ec;
+
+    text-shadow:
+
+        0 0 12px hotpink,
+
+        0 0 30px white;
+
+}
+
+.birthdayLine{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:#c2185b;
+
+    margin:18px 0;
+
+    text-shadow:
+        0 0 12px white;
+
+}
+
+.loveLine{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:42px;
+
+    font-style:italic;
+
+    color:#0f0d0ef9;
+
+    margin:15px 0;
+
+}
+
+.signatureLine{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:40px;
+
+    font-weight:bold;
+
+    color:#0a0809;
+
+    margin:10px 0;
+
+}
+
+.fadeLine{
+
+    color:#0a0909;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.8);
+
+}
+
+@keyframes fadeLetter{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+#introMessage{
+
+    width:75%;
+
+    max-width:900px;
+
+    margin:40px auto 0;
+
+    text-align:center;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:34px;
+
+    line-height:1.5;
+
+    color:#3b1f1f;
+
+    font-weight:600;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.9);
+
+}
+
+.letterLine{
+
+    margin:10px 0;
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:36px;
+
+    font-weight:600;
+
+    color:#432626;
+
+    line-height:1.35;
+
+    text-align:center;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.8);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 id="mainTitle">
+
+❤️ A Letter To My Nanna ❤️
+
+<br>
+
+</h1>
+
+
+<p id="subTitle">
+
+❤️ Written with tiny hands... and heart full of love ❤️
+<br>
+</p>
+
+<div id="msg">
+
+I have been waiting all this time to tell you something special...
+
+<br>
+
+💌 A message is waiting for you 💌
+
+<br>
+
+Open only if your heart is ready 🥹❤️
+
+</div>
+
+<button id="openBtn" onclick="showMessage()">
+
+👶 Open My Letter Nanna ❤️ ❤️
+
+</button>
+
+<script>
+
+function babyExplosion(){
+
+    let baby =
+    document.createElement("img");
+
+    baby.src = "baby.png";
+
+    baby.classList.add("babyExplosion");
+
+    baby.style.left =
+    Math.random()*window.innerWidth + "px";
+
+    baby.style.top =
+    Math.random()*window.innerHeight + "px";
+
+    document.body.appendChild(baby);
+
+    setTimeout(()=>{
+
+        baby.remove();
+
+    },5000);
+
+}
+
+function createBabyBubble(){
+
+    let bubble =
+    document.createElement("div");
+
+    bubble.className = "babyBubble";
+
+    bubble.style.left =
+    Math.random() * (window.innerWidth - 120) + "px";
+
+    bubble.style.bottom = "-120px";
+
+    bubble.innerHTML =
+    '<img src="baby.png">';
+
+    document.body.appendChild(bubble);
+
+    setTimeout(()=>{
+
+        bubble.remove();
+
+    },8000);
+
+}
+
+function showLetter(){
+
+    let msg = document.getElementById("msg");
+
+    msg.innerHTML = "";
+
+    let index = 0;
+
+    let timer = setInterval(function(){
+
+        if(index >= letter.length){
+
+            clearInterval(timer);
+
+            msg.innerHTML +=
+            "<br><br><button onclick='showBaby()' id='babyBtn'>👶 Touch Me If You Want To See Me Nanna ❤️</button>";
+
+            return;
+        }
+
+ let currentLine = letter[index];
+
+let className = "letterLine";
+
+if(currentLine.includes("HAPPY BIRTHDAY")){
+
+    className = "birthdayLine";
+
+}
+
+else if(currentLine.includes("I Love You")){
+
+    className = "loveLine";
+
+}
+
+else if(currentLine.includes("Your Little Baby")){
+
+    className = "signatureLine";
+
+}
+
+else if(currentLine.includes("Kannaya")){
+
+    className = "signatureLine";
+
+}
+
+msg.innerHTML +=
+`
+<p class="${className}">
+${currentLine}
+</p>
+`;
+
+window.scrollTo({
+
+    top: document.body.scrollHeight,
+
+    behavior:"smooth"
+
+});
+
+        
+
+        index++;
+
+    },1600);
+
+}
+
+const letter = [
+
+"🎂 Happy Birthday NANNA.. ❤️",
+
+"Hello NANNA..... 👶",
+
+"Right now I am still safe inside AMMA's tummy.",
+
+"Every day I hear your voice, your laughter, and the way you take care of AMMA. ❤️",
+
+"Even though we haven't met yet, I already know one thing...",
+
+"I am the luckiest baby in the world because I got you as my NANNA... 🥹❤️",
+
+"I see how excited you are to meet me.",
+
+"I see how much you care for AMMA.",
+
+"I see how much love fills our little family. ❤️",
+
+"NANNA.....",
+
+"Thank you for taking care of AMMA when she is tired.",
+
+"Thank you for making her smile.",
+
+"Thank you for loving us even before I arrived. 👶❤️",
+
+"There is one small favor I want to ask from you... 🥹❤️",
+
+"Sometimes AMMA gets tired.",
+
+"Sometimes she wakes up early and still goes to work.",
+
+"Sometimes she handles office work, household work, and takes care of me at the same time. ❤️",
+
+"Sometimes even simple things like exercise, walking, or washing dishes make her tired.",
+
+"So until I arrive...",
+
+"Can you please help Amma a little more? ❤️",
+
+"When she is tired, make her rest.",
+
+"When she is stressed, make her smile.",
+
+"When she is doing too much work, remind her that she is carrying our little world inside her. 👶❤️",
+
+"Please give her extra hugs.",
+
+"Please give her extra love.",
+
+"And maybe help her with the dishes sometimes too 😜🍽️",
+
+"Because right now Amma is taking care of me every single second.",
+
+"And I know she feels happiest when you take care of her too. ❤️",
+
+"That will be the best birthday gift you can give both of us. 🎁❤️",
+
+"Very soon I will be in your arms.",
+
+"Very soon I will call you NANNA...",
+
+"Very soon our little family will become complete. ❤️",
+
+"Please keep smiling.",
+
+"Please keep being the amazing husband and future father that you are. 🥰",
+
+"🎂 HAPPY BIRTHDAY NANNA ❤️ 🎂",
+
+"We love you more than words can ever express.",
+
+"Belated Happy Father's Day NANNA ❤️",
+
+"I Love You NANNA... Today, Tomorrow and Forever. ❤️🥹",
+
+"👶 Your Little Baby",
+
+"❤️ Kannaya ❤️"
+
+];
+
+function showMessage(){
+
+    //document.getElementById("letterSong").play();
+
+   let letterSong = document.getElementById("letterSong");
+
+letterSong.loop = true;
+
+letterSong.currentTime = 0;
+
+letterSong.play().catch(err => {
+    console.log(err);
+});
+
+    document.getElementById("openBtn").style.display =
+    "none";
+
+    document.getElementById("msg").innerHTML =
+
+    "<h2>👶 Baby Kannaya is preparing a special message for NANNA... ❤️</h2>";
+
+    let bubbleInterval = setInterval(() => {
+
+    createBabyBubble();
+
+},1200);
+
+setTimeout(() => {
+
+    clearInterval(bubbleInterval);
+
+    showLetter();
+
+}, 5000);
+
+
+}
+
+function showBaby(){
+
+   // document.getElementById("letterSong").pause();
+
+    let letterSong = document.getElementById("letterSong");
+
+letterSong.loop = false;
+
+letterSong.pause();
+
+letterSong.currentTime = 0;
+
+    let song =
+    document.getElementById("finalSong");
+
+    document.getElementById("babyPopup").style.display =
+    "block";
+
+    song.currentTime = 0;
+
+    song.play();
+
+    song.onended = function(){
+
+        document.getElementById("babyPopup").style.display =
+        "none";
+         window.location.href = "Level6.html";
+
+    };
+
+}
+
+</script>
+
+<div id="babyPopup">
+
+    <img src="Ourbaby.png" id="babyPic">
+
+    <h2>👶 Hi Nanna... It's Me ❤️</h2>
+
+    <p>
+    I am waiting to meet you soon 🥹❤️
+    </p>
+
+</div>
+
+<audio id="letterSong">
+
+    <source src="gummadi.mp3" type="audio/mpeg">
+
+</audio>
+
+<audio id="finalSong">
+
+    <source src="music.mp3" type="audio/mpeg">
+
+</audio>
+
+</body>
+
+</html>

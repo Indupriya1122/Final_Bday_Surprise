@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Level 2</title>
+
+    <style>
+
+        body{
+
+    background-image:url("level1Bg.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    margin:0;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    font-family:Arial,sans-serif;
+
+}
+
+        h1{
+
+    color:#FFF8DC;
+
+    margin-top:60px;
+
+    font-size:60px;
+
+    text-shadow:
+    0 0 10px #FFD700,
+    0 0 25px #FF69B4,
+    0 0 40px white;
+
+}
+
+        #status{
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    text-shadow:
+    0 0 10px hotpink,
+    0 0 20px white;
+
+}
+
+        #gift{
+
+            position:absolute;
+
+            left:500px;
+            top:300px;
+
+            font-size:120px;
+            filter:drop-shadow(0px 0px 10px pink);
+
+            cursor:pointer;
+
+            transition:0.2s;
+
+        }
+
+ #babyPopup{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(20,0,30,.45);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    z-index:9999;
+
+}
+
+@keyframes popBaby{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,-40%)
+        scale(.7);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+
+    }
+
+}
+
+.popupContent{
+
+    margin-top:120px;
+
+}
+
+.babyImage{
+
+    width:130px;
+
+    height:130px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid white;
+
+    box-shadow:
+        0 0 20px hotpink,
+        0 0 40px pink;
+
+    margin-bottom:20px;
+
+}
+.babyEmoji{
+
+    font-size:75px;
+
+    margin-bottom:15px;
+
+}
+
+#babyMessage h2{
+
+    color:#ff2f8b;
+
+    font-size:48px;
+
+    text-shadow:
+    0 0 10px white,
+    0 0 20px hotpink;
+
+}
+
+#babyMessage{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:900px;
+    height:760px;
+
+    background-image:url("babymsgPopup.png");
+
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    animation:popBaby 1s ease;
+
+    filter:drop-shadow(0 0 35px hotpink);
+
+}
+
+.floatingHeart{
+
+    position:fixed;
+
+    font-size:35px;
+
+    pointer-events:none;
+
+    animation:heartFloat 5s linear forwards;
+
+}
+
+@keyframes heartFloat{
+
+    from{
+
+        transform:translateY(100vh);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateY(-120vh);
+
+        opacity:1;
+
+    }
+
+}
+
+#babyPopup{
+
+    display:none;
+
+    opacity:0;
+
+    transition:opacity .8s ease;
+
+}
+    </style>
+
+</head>
+
+<body>
+
+<h1>❤️ Catch Our Love... Baby...❤️</h1>
+
+<p id="status">
+    ❤️ Every catch unlocks another chapter of our story... ❤️
+</p>
+
+<div id="gift">🎁</div>
+
+<script>
+
+// const gift = document.getElementById("gift");
+const love = document.getElementById("gift");
+
+const status = document.getElementById("status");
+
+let attempts = 0;
+
+const storyIcons = [
+
+"❤️",
+"🌹",
+"💌",
+"💍",
+"👶"
+
+];
+
+let currentStage = 0;
+
+const messages = [
+
+    "Too Slow Birthday Boy 😂",
+
+    "Future Daddy needs practice 👶",
+
+    "Catch me if you can 😜",
+
+    "Grandpa Reflexes Detected 😂",
+
+    "Still trying? 😆",
+
+    "Almost there ❤️",
+
+    "Not today Kannaya 😎",
+
+    "Bujjuluu trained me well 😂",
+
+    "Loading Husband Skills... 42%",
+
+    "Birthday Boy.exe has stopped working 🤣"
+
+];
+
+love.addEventListener("mouseover", function(){
+
+    attempts++;
+
+    if(attempts % 2 === 0){
+
+    // Don't change from 👶 to 🎂 yet
+    if(currentStage < 4){
+
+        currentStage++;
+
+        love.innerHTML = storyIcons[currentStage];
+
+    }
+
+}
+
+    let x =
+    Math.random() * (window.innerWidth - 150);
+
+    let y =
+    Math.random() * (window.innerHeight - 150);
+
+    love.style.left = x + "px";
+
+    love.style.top = y + "px";
+
+    let randomMessage =
+
+    messages[
+        Math.floor(
+            Math.random()*messages.length
+        )
+    ];
+
+    status.innerHTML = randomMessage;
+
+// 👶 Show Baby Popup after Baby stage
+if(currentStage == 4 && attempts >= 10){
+
+    love.style.display = "none";
+
+    // document.getElementById("babyPopup").style.display = "block";
+
+    const popup = document.getElementById("babyPopup");
+
+popup.style.display = "block";
+
+setTimeout(() => {
+
+    popup.style.opacity = "1";
+
+},50);
+
+    for(let i=0;i<25;i++){
+
+    let heart = document.createElement("div");
+
+    heart.className = "floatingHeart";
+
+    const hearts = ["❤️","💕","💖","💗"];
+
+    heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left = Math.random()*window.innerWidth + "px";
+
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },6000);
+
+}
+
+    status.innerHTML = "";
+
+    setTimeout(function(){
+
+        window.location.href = "Level3.html";
+
+    },5000);
+
+}
+
+
+});
+
+</script>
+
+<audio id="entrySong" autoplay>
+    <source src="Entry.mp3" type="audio/mpeg">
+</audio>
+
+<div id="babyPopup">
+
+    <div id="babyMessage">
+
+        <!-- If your image already has all the text -->
+        <!-- Leave this empty -->
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
